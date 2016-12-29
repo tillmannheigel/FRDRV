@@ -9,9 +9,9 @@ import java.io.IOException;
  */
 public class Crawler {
 
-    public void crawlHtmlElements(String url, String cssQuery) throws IOException{
+    public Elements crawlHtmlElements(String url, String cssQuery) throws IOException {
         Document doc = Jsoup.connect(url).get();
-        Elements listItem = doc.select(cssQuery);
+        return doc.select(cssQuery);
     }
 
 }
