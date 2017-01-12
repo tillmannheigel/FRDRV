@@ -1,3 +1,7 @@
+plugins {
+    id "io.franzbecker.gradle-lombok" version "1.8"
+}
+
 apply plugin: 'java'
 apply plugin: 'application'
 
@@ -10,5 +14,5 @@ repositories {
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.jsoup:jsoup:1.10.1'
-    testCompile 'junit:junit:4.12'
 }
+
