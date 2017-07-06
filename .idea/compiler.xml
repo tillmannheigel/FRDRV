@@ -17,6 +17,8 @@
     <bytecodeTargetLevel>
       <module name="driverv2_main" target="1.8" />
       <module name="driverv2_test" target="1.8" />
+      <module name="freedriver_V2_main" target="1.8" />
+      <module name="freedriver_V2_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

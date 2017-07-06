@@ -1,11 +1,7 @@
-package model;
+package models;
 
 import lombok.Data;
-import lombok.Value;
 
-/**
- * Created by tillmannheigel on 30.12.16.
- */
 @Data
 public class StarcarModel {
     String car;
