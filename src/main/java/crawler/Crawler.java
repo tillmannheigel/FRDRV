@@ -1,14 +1,15 @@
 package crawler;
 
+import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-/**
- * Created by tillmannheigel on 29.12.16.
- */
+@Builder
+@Slf4j
 public class Crawler {
 
     public Elements crawlHtmlElements(String url, String cssQuery) throws IOException {

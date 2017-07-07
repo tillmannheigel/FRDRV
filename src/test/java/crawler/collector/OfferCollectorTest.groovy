@@ -9,7 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
-import static org.junit.Assert.assertArrayEquals
+import static org.junit.Assert.assertEquals
 
 @RunWith(MockitoJUnitRunner.class)
 class OfferCollectorTest extends Mockito {
@@ -20,15 +20,14 @@ class OfferCollectorTest extends Mockito {
     Crawler crawler
 
     @Test
-    void testCollectOffersForEmptyModel() {
+    void testCollectOffersForEmptyModelHasSize0() {
         //given
         Elements elements = new Elements(0)
-        when(crawler.crawlHtmlElements(null, null)).thenReturn(elements)
 
         //when
+        when(crawler.crawlHtmlElements(null, null)).thenReturn(elements)
 
         //then
-        assertArrayEquals(offerCollector.collectOffers(), new String[0])
+        assertEquals(offerCollector.collectOffers().size(), 0)
     }
-
 }
