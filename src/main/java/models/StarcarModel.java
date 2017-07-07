@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class StarcarModel {
+
     String car;
     String group;
     String type;
