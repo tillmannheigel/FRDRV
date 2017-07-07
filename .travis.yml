@@ -1,8 +1,5 @@
 language: java
-
 sudo: false
-
 script: gradle test
-
 jdk:
 - oraclejdk8
