@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Crawler {
 
     public Elements crawlHtmlElements(String url, String cssQuery) throws IOException {
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(url).timeout(10000).get();
         return doc.select(cssQuery);
     }
 
