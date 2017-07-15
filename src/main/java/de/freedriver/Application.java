@@ -1,17 +1,19 @@
-package main;
+package de.freedriver;
 
 import com.google.common.base.Joiner;
-import crawler.collector.OfferCollector;
-import crawler.parser.OfferParser;
+import de.freedriver.crawler.collector.OfferCollector;
+import de.freedriver.crawler.parser.OfferParser;
+import de.freedriver.models.Vendor;
+import de.freedriver.models.Vendors;
+import de.freedriver.service.KafkaMessengerService;
+import de.freedriver.util.VendorsParser;
 import lombok.extern.slf4j.Slf4j;
-import models.Vendor;
-import models.Vendors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import util.VendorsParser;
 
 import java.util.HashSet;
 
@@ -20,12 +22,16 @@ import java.util.HashSet;
 @EnableScheduling
 public class Application implements ApplicationRunner {
 
+    @Autowired
+    KafkaMessengerService kafkaMessengerService;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        log.info("Hello Kafka: {}", kafkaMessengerService.toString());
         VendorsParser parser = new VendorsParser();
         Vendors vendors = parser.getAllVendors();
         for (Vendor vendor : vendors.getVendors()) {

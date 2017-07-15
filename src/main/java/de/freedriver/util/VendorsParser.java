@@ -1,9 +1,9 @@
-package util;
+package de.freedriver.util;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import models.Vendors;
+import de.freedriver.models.Vendors;
 
 import java.io.File;
 import java.io.IOException;

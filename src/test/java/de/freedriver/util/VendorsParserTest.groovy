@@ -1,4 +1,4 @@
-package util
+package de.freedriver.util
 
 import org.mockito.Mockito
 

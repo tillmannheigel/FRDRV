@@ -1,4 +1,4 @@
-package crawler;
+package de.freedriver.crawler;
 
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;

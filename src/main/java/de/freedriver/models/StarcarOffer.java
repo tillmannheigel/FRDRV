@@ -1,4 +1,4 @@
-package models;
+package de.freedriver.models;
 
 import lombok.Builder;
 import lombok.Data;

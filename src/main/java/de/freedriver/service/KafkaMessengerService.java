@@ -1,4 +1,4 @@
-package util;
+package de.freedriver.service;
 
 import org.springframework.stereotype.Component;
 

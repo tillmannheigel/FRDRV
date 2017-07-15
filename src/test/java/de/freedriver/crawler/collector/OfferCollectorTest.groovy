@@ -1,6 +1,6 @@
-package crawler.collector
+package de.freedriver.crawler.collector
 
-import crawler.Crawler
+import de.freedriver.crawler.Crawler
 import org.jsoup.select.Elements
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,7 +1,7 @@
-package crawler.parser;
+package de.freedriver.crawler.parser;
 
-import crawler.Crawler;
-import models.Offer;
+import de.freedriver.crawler.Crawler;
+import de.freedriver.models.Offer;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;

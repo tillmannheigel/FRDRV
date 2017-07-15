@@ -5,11 +5,6 @@
       "url": "https://www.starcar.de/specials/kostenlos-mieten/",
       "css": ".togglelist-content-item",
       "offerCss": "tr .bold ~ td"
-    },
-    {
-      "title": "Freifahrt",
-      "url": "https://www.freifahrt.de/web/aktuelle_freifahrten_1/",
-      "css": ".tabelle_standard"
     }
   ]
 }

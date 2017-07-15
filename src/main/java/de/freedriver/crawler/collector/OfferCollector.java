@@ -1,6 +1,6 @@
-package crawler.collector;
+package de.freedriver.crawler.collector;
 
-import crawler.Crawler;
+import de.freedriver.crawler.Crawler;
 import lombok.Builder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

@@ -1,12 +1,12 @@
-package crawler.parser;
+package de.freedriver.crawler.parser;
 
 import com.google.common.annotations.VisibleForTesting;
-import crawler.Crawler;
+import de.freedriver.crawler.Crawler;
+import de.freedriver.models.Offer;
+import de.freedriver.models.StarcarOffer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import models.Offer;
-import models.StarcarOffer;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
