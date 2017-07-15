@@ -1,17 +1,31 @@
+package main;
+
 import com.google.common.base.Joiner;
 import crawler.collector.OfferCollector;
 import crawler.parser.OfferParser;
 import lombok.extern.slf4j.Slf4j;
 import models.Vendor;
 import models.Vendors;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import util.VendorsParser;
 
 import java.util.HashSet;
 
 @Slf4j
-public class Main {
+@SpringBootApplication
+@EnableScheduling
+public class Application implements ApplicationRunner {
 
     public static void main(String[] args) {
+        SpringApplication.run(Application.class);
+    }
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
         VendorsParser parser = new VendorsParser();
         Vendors vendors = parser.getAllVendors();
         for (Vendor vendor : vendors.getVendors()) {
