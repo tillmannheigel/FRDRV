@@ -1,13 +1,14 @@
 package de.freedriver.crawler.parser;
 
 import com.google.common.annotations.VisibleForTesting;
-import de.freedriver.crawler.Crawler;
+import de.freedriver.crawler.CrawlerService;
 import de.freedriver.models.Offer;
 import de.freedriver.models.StarcarOffer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
@@ -23,10 +24,10 @@ public class OfferParser {
     String offerType;
     private String url;
     private String offerCss;
-    private Crawler crawler;
+    @Autowired
+    private CrawlerService crawler;
 
     public Offer parseOffer() {
-        if (crawler == null) crawler = Crawler.builder().build();
         try {
             Elements elements = crawler.crawlHtmlElements(url, offerCss);
             switch (getOfferType()) {

@@ -1,6 +1,6 @@
 package de.freedriver.crawler.parser;
 
-import de.freedriver.crawler.Crawler;
+import de.freedriver.crawler.CrawlerService;
 import de.freedriver.models.Offer;
 import org.jsoup.select.Elements;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class OfferParserTest extends Mockito {
     @InjectMocks
     OfferParser offerParser;
     @Mock
-    Crawler crawler;
+    CrawlerService crawler;
 
 
     @Test

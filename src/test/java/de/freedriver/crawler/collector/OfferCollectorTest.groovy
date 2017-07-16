@@ -1,6 +1,6 @@
 package de.freedriver.crawler.collector
 
-import de.freedriver.crawler.Crawler
+import de.freedriver.crawler.CrawlerService
 import org.jsoup.select.Elements
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,12 +15,12 @@ import static org.junit.Assert.assertEquals
 class OfferCollectorTest extends Mockito {
 
     @InjectMocks
-    OfferCollector offerCollector
+    OfferCollectorService offerCollectorService
     @Mock
-    Crawler crawler
+    CrawlerService crawler
 
     @Test
-    void testCollectOffersForEmptyModelHasSize0() {
+    void testCollectOffersForEmptyModel() {
         //given
         Elements elements = new Elements(0)
 
@@ -28,6 +28,18 @@ class OfferCollectorTest extends Mockito {
         when(crawler.crawlHtmlElements(null, null)).thenReturn(elements)
 
         //then
-        assertEquals(offerCollector.collectOffers().size(), 0)
+        assertEquals(offerCollectorService.collectOffers(null, null).size(), 0)
+    }
+
+    @Test
+    void testCollectOffersCatchesIOException() {
+        //given
+        Elements elements = new Elements(0)
+
+        //when
+        when(crawler.crawlHtmlElements(null, null)).thenThrow(new IOException())
+
+        //then
+        assertEquals(offerCollectorService.collectOffers(null, null).size(), 0)
     }
 }

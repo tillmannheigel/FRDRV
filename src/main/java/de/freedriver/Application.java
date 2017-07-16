@@ -1,8 +1,7 @@
 package de.freedriver;
 
 import com.google.common.base.Joiner;
-import de.freedriver.crawler.collector.OfferCollector;
-import de.freedriver.crawler.parser.OfferParser;
+import de.freedriver.crawler.collector.OfferCollectorService;
 import de.freedriver.models.Vendor;
 import de.freedriver.models.Vendors;
 import de.freedriver.service.KafkaMessengerService;
@@ -24,6 +23,8 @@ public class Application implements ApplicationRunner {
 
     @Autowired
     KafkaMessengerService kafkaMessengerService;
+    @Autowired
+    OfferCollectorService offerCollectorService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
@@ -34,21 +35,20 @@ public class Application implements ApplicationRunner {
         log.info("Hello Kafka: {}", kafkaMessengerService.toString());
         VendorsParser parser = new VendorsParser();
         Vendors vendors = parser.getAllVendors();
+        kafkaMessengerService.sendDummyMessage();
         for (Vendor vendor : vendors.getVendors()) {
-            OfferCollector offerCollector = OfferCollector
-                    .builder()
-                    .cssQuery(vendor.getCss())
-                    .url(vendor.getUrl())
-                    .build();
-            HashSet<String> offersSet = offerCollector.collectOffers();
+            HashSet<String> offersSet = offerCollectorService.collectOffers(vendor.getUrl(), vendor.getCss());
             String setToString = Joiner.on("\n").skipNulls().join(offersSet);
             log.info("load offers of vendor: {}\n{}", vendor.getTitle(), setToString);
             log.info("count: {}", offersSet.size());
             String[] offersArray = offersSet.stream().toArray(String[]::new);
-            for (int j = 0; j < offersSet.size(); j++) {
+           /* for (int j = 0; j < offersSet.size(); j++) {
                 OfferParser.builder().offerCss(vendor.getOfferCss()).offerType(vendor.getTitle()).url(offersArray[j]).build().parseOffer();
                 j++;
-            }
+
+        */
+
         }
     }
 }
+
