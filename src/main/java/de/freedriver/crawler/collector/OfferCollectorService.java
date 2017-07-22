@@ -2,7 +2,6 @@ package de.freedriver.crawler.collector;
 
 import de.freedriver.crawler.CrawlerService;
 import de.freedriver.service.KafkaMessengerService;
-import lombok.Data;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 
-@Data
 @Component
 public class OfferCollectorService {
 
     @Autowired
-    KafkaMessengerService kafkaMessengerService;
+    private KafkaMessengerService kafkaMessengerService;
     @Autowired
-    CrawlerService crawlerService;
+    private CrawlerService crawlerService;
 
     public HashSet<String> collectOffers(String url, String cssQuery) {
         try {
