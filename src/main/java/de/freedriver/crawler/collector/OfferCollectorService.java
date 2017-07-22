@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 @Component
 public class OfferCollectorService {
@@ -22,10 +22,9 @@ public class OfferCollectorService {
     public HashSet<String> collectOffers(String url, String cssQuery) {
         try {
             Elements elements = crawlerService.crawlHtmlElements(url, cssQuery);
-            String[] array = elements.stream()
+            return elements.stream()
                     .map(this::extractLinks)
-                    .toArray(String[]::new);
-            return new HashSet<>(Arrays.asList(array));
+                    .collect(Collectors.toCollection(HashSet::new));
         } catch (IOException e) {
             kafkaMessengerService.sendToExceptionTopic(this.toString(), e.getMessage());
             e.printStackTrace();
