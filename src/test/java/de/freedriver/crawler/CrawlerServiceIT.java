@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by ou on 22.07.17.
  */
-public class CrawlerServiceTest extends Mockito {
+public class CrawlerServiceIT extends Mockito {
 
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(8081);
