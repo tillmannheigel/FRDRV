@@ -2,6 +2,7 @@ package de.freedriver.crawler.parser;
 
 import de.freedriver.crawler.CrawlerService;
 import de.freedriver.models.Offer;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +23,23 @@ public class OfferParserTest extends Mockito {
 
 
     @Test
-    public void parseOffer() throws Exception {
+    public void parseEmptyOffer() throws Exception {
         //given
         Elements elements = new Elements(0);
+        offerParser.offerType = "abc";
+        //when
+        when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
+        Offer offer = offerParser.parseOffer();
+        //then
+        assertNull(offer);
+    }
+
+    @Test
+    public void parseExistingOffer() throws Exception {
+        //given
+        Element element = mock(Element.class);
+        Elements elements = new Elements(1);
+        elements.set(1, element);
         offerParser.offerType = "abc";
         //when
         when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
