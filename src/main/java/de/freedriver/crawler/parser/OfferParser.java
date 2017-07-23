@@ -41,32 +41,26 @@ public class OfferParser {
     }
 
     private StarcarOffer parseStarcars(Elements elements) {
-        if (elements != null && elements.size() > 0) {
-            String car;
-            String plate;
-            String age = "18 Jahre";
-            String date;
-            String startStation;
-            String returnStation;
+        if (elements != null)
             if (elements.size() == 5) { // no age field
-                car = elements.get(0).html();
-                plate = elements.get(1).html();
-                date = elements.get(2).html();
-                startStation = elements.get(3).html();
-                returnStation = elements.get(4).html();
-            } else { // custom age field
-                car = elements.get(0).html();
-                plate = elements.get(1).html();
-                age = elements.get(2).html();
-                date = elements.get(3).html();
-                startStation = elements.get(4).html();
-                returnStation = elements.get(5).html();
+                String car = elements.get(0).html();
+                String plate = elements.get(1).html();
+                String date = elements.get(2).html();
+                String startStation = elements.get(3).html();
+                String returnStation = elements.get(4).html();
+                String age = "18 Jahre";
+                return StarcarOffer.builder().car(car).age(age).startStation(startStation).returnStation(returnStation).date(date).plate(plate).url(url).build();
             }
-            StarcarOffer offer = StarcarOffer.builder().car(car).age(age).startStation(startStation).returnStation(returnStation).date(date).plate(plate).url(url).build();
-            log.info("Starcar Offer {}", offer);
-            return offer;
+        if (elements.size() == 6) { // custom age field
+            String car = elements.get(0).html();
+            String plate = elements.get(1).html();
+            String age = elements.get(2).html();
+            String date = elements.get(3).html();
+            String startStation = elements.get(4).html();
+            String returnStation = elements.get(5).html();
+            return StarcarOffer.builder().car(car).age(age).startStation(startStation).returnStation(returnStation).date(date).plate(plate).url(url).build();
         }
         return null;
     }
-
 }
+

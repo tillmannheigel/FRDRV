@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,14 +39,19 @@ public class OfferParserTest extends Mockito {
     public void parseExistingOffer() throws Exception {
         //given
         Element element = mock(Element.class);
-        Elements elements = new Elements(1);
-        elements.set(1, element);
+        Elements elements = mock(Elements.class);
         offerParser.offerType = "abc";
-        //when
         when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
-        Offer offer = offerParser.parseOffer();
-        //then
-        assertNull(offer);
-    }
+        when(elements.size()).thenReturn(5);
+        when(element.html()).thenReturn("mockHtml");
+        for (int i = 0; i < 6; i++) {
+            when(elements.get(i)).thenReturn(element);
+        }
 
+        //when
+        Offer offer = offerParser.parseOffer();
+
+        //then
+        assertNotNull(offer);
+    }
 }
