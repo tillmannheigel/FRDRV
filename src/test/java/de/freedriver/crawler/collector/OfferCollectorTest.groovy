@@ -1,7 +1,7 @@
 package de.freedriver.crawler.collector
 
 import de.freedriver.crawler.CrawlerService
-import de.freedriver.service.KafkaMessengerService
+
 import org.jsoup.select.Elements
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,8 +19,6 @@ class OfferCollectorTest extends Mockito {
     OfferCollectorService offerCollectorService
     @Mock
     CrawlerService crawler
-    @Mock
-    KafkaMessengerService kafkaMessengerService
 
     @Test
     void testCollectOffersForEmptyModel() {
