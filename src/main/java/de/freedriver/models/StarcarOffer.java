@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class StarcarOffer extends Offer {
+public class StarcarOffer implements Offer {
 
     String car;
     String plate;

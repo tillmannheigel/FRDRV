@@ -4,13 +4,12 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.freedriver.models.Vendors;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by ou on 07.07.17.
- */
+@Component
 public class VendorsParser {
 
     public Vendors getAllVendors() {

@@ -1,6 +1,7 @@
 package de.freedriver.crawler.collector;
 
 import de.freedriver.crawler.CrawlerService;
+import de.freedriver.models.Vendor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,9 +19,9 @@ public class OfferCollectorService {
     @Autowired
     private CrawlerService crawlerService;
 
-    public HashSet<String> collectOffers(String url, String cssQuery) {
+    public HashSet<String> collectOffers(Vendor vendor) {
         try {
-            Elements elements = crawlerService.crawlHtmlElements(url, cssQuery);
+            Elements elements = crawlerService.crawlHtmlElements(vendor.getUrl(), vendor.getCss());
             return elements.stream()
                     .map(this::extractLinks)
                     .collect(Collectors.toCollection(HashSet::new));
@@ -28,7 +29,7 @@ public class OfferCollectorService {
             log.error("Unable to collect offers {}", e.getMessage(), e);
             e.printStackTrace();
         }
-        return new HashSet<>();
+        return null;
     }
 
     private String extractLinks(Element element) {

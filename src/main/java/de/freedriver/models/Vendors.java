@@ -9,6 +9,5 @@ import java.util.ArrayList;
  */
 @Data
 public class Vendors {
-
     ArrayList<Vendor> vendors;
 }

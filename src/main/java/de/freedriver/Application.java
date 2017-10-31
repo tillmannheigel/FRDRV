@@ -1,6 +1,5 @@
 package de.freedriver;
 
-import com.google.common.base.Joiner;
 import de.freedriver.crawler.collector.OfferCollectorService;
 import de.freedriver.crawler.parser.OfferParser;
 import de.freedriver.models.Vendor;
@@ -25,6 +24,8 @@ public class Application implements ApplicationRunner {
     OfferCollectorService offerCollectorService;
     @Autowired
     OfferParser offerParser;
+    @Autowired
+    VendorsParser vendorsParser;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
@@ -32,15 +33,16 @@ public class Application implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        VendorsParser parser = new VendorsParser();
-        Vendors vendors = parser.getAllVendors();
+        Vendors vendors = vendorsParser.getAllVendors();
+
         for (Vendor vendor : vendors.getVendors()) {
-            HashSet<String> offersSet = offerCollectorService.collectOffers(vendor.getUrl(), vendor.getCss());
-            String setToString = Joiner.on("\n").skipNulls().join(offersSet);
-            log.debug("load offers of vendor: {}\n{}", vendor.getTitle(), setToString);
-            log.debug("count: {}", offersSet.size());
-            offersSet.stream().map(s -> offerParser.parseOffer(s, vendor.getOfferCss())).forEach(s -> log.debug(s));
+            HashSet<String> offers = offerCollectorService.collectOffers(vendor);
+            for (String offer : offers) {
+                String parsedOffer = offerParser.parseOffer(offer, vendor.getOfferCss());
+                log.info(parsedOffer);
+            }
         }
+
     }
 }
 
