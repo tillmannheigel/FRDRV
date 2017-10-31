@@ -19,7 +19,7 @@ public class OfferCollectorService {
     @Autowired
     private CrawlerService crawlerService;
 
-    public HashSet<String> collectOffers(Vendor vendor) {
+    public HashSet<String> crawlOfferUrls(Vendor vendor) {
         try {
             Elements elements = crawlerService.crawlHtmlElements(vendor.getUrl(), vendor.getCss());
             return elements.stream()

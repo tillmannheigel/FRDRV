@@ -1,7 +1,6 @@
 package de.freedriver.crawler.collector
 
 import de.freedriver.crawler.CrawlerService
-
 import org.jsoup.select.Elements
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,7 +28,7 @@ class OfferCollectorTest extends Mockito {
         when(crawler.crawlHtmlElements(null, null)).thenReturn(elements)
 
         //then
-        assertEquals(offerCollectorService.collectOffers(null, null).size(), 0)
+        assertEquals(offerCollectorService.crawlOfferUrls(null, null).size(), 0)
     }
 
     @Test
@@ -41,7 +40,7 @@ class OfferCollectorTest extends Mockito {
         when(crawler.crawlHtmlElements(null, null)).thenThrow(ioException)
 
         //then
-        assertEquals(offerCollectorService.collectOffers(null, null).size(), 0)
+        assertEquals(offerCollectorService.crawlOfferUrls(null, null).size(), 0)
     }
 
 }

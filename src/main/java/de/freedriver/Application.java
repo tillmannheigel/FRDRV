@@ -2,8 +2,10 @@ package de.freedriver;
 
 import de.freedriver.crawler.collector.OfferCollectorService;
 import de.freedriver.crawler.parser.OfferParser;
+import de.freedriver.models.Offer;
 import de.freedriver.models.Vendor;
 import de.freedriver.models.Vendors;
+import de.freedriver.repositories.OffersRepository;
 import de.freedriver.util.VendorsParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,13 @@ import java.util.HashSet;
 public class Application implements ApplicationRunner {
 
     @Autowired
-    OfferCollectorService offerCollectorService;
+    private OfferCollectorService offerCollectorService;
     @Autowired
-    OfferParser offerParser;
+    private OfferParser offerParser;
     @Autowired
-    VendorsParser vendorsParser;
+    private VendorsParser vendorsParser;
+    @Autowired
+    private OffersRepository offersRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
@@ -36,10 +40,10 @@ public class Application implements ApplicationRunner {
         Vendors vendors = vendorsParser.getAllVendors();
 
         for (Vendor vendor : vendors.getVendors()) {
-            HashSet<String> offers = offerCollectorService.collectOffers(vendor);
-            for (String offer : offers) {
-                String parsedOffer = offerParser.parseOffer(offer, vendor.getOfferCss());
-                log.info(parsedOffer);
+            HashSet<String> urls = offerCollectorService.crawlOfferUrls(vendor);
+            for (String url : urls) {
+                Offer offer = offerParser.parseOffer(url, vendor.getOfferCss());
+                offersRepository.save(offer);
             }
         }
 

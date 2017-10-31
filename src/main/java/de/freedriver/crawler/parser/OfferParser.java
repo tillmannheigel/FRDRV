@@ -2,6 +2,7 @@ package de.freedriver.crawler.parser;
 
 import com.google.common.annotations.VisibleForTesting;
 import de.freedriver.crawler.CrawlerService;
+import de.freedriver.models.Offer;
 import de.freedriver.models.StarcarOffer;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +25,11 @@ public class OfferParser {
     @Autowired
     private CrawlerService crawler;
 
-    public String parseOffer(String url, String offerCss) {
+    public Offer parseOffer(String url, String offerCss) {
         try {
             Elements elements = crawler.crawlHtmlElements(url, offerCss);
             log.debug(String.valueOf(elements));
-            String offer = String.valueOf(parseStarcars(elements, url));
-            log.debug(offer);
-            return offer;
+            return parseStarcars(elements, url);
         } catch (IOException io) {
             io.printStackTrace();
         }
