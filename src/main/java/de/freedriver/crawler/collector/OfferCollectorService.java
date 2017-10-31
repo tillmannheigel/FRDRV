@@ -1,7 +1,6 @@
 package de.freedriver.crawler.collector;
 
 import de.freedriver.crawler.CrawlerService;
-import de.freedriver.service.KafkaMessengerService;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -17,8 +16,6 @@ import java.util.stream.Collectors;
 public class OfferCollectorService {
 
     @Autowired
-    private KafkaMessengerService kafkaMessengerService;
-    @Autowired
     private CrawlerService crawlerService;
 
     public HashSet<String> collectOffers(String url, String cssQuery) {
@@ -28,7 +25,6 @@ public class OfferCollectorService {
                     .map(this::extractLinks)
                     .collect(Collectors.toCollection(HashSet::new));
         } catch (IOException e) {
-            kafkaMessengerService.sendToExceptionTopic(this.toString(), e.getMessage());
             log.error("Unable to collect offers {}", e.getMessage(), e);
             e.printStackTrace();
         }

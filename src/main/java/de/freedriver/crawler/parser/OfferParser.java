@@ -2,45 +2,42 @@ package de.freedriver.crawler.parser;
 
 import com.google.common.annotations.VisibleForTesting;
 import de.freedriver.crawler.CrawlerService;
-import de.freedriver.models.Offer;
 import de.freedriver.models.StarcarOffer;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 /**
  * Created by ou on 07.07.17.
  */
-@Builder
 @Slf4j
 @Getter
+@Component
 public class OfferParser {
 
     @VisibleForTesting
     String offerType;
-    private String url;
-    private String offerCss;
     @Autowired
     private CrawlerService crawler;
 
-    public Offer parseOffer() {
+    public String parseOffer(String url, String offerCss) {
         try {
             Elements elements = crawler.crawlHtmlElements(url, offerCss);
-            switch (getOfferType()) {
-                default:
-                    return parseStarcars(elements);
-            }
+            log.debug(String.valueOf(elements));
+            String offer = String.valueOf(parseStarcars(elements, url));
+            log.debug(offer);
+            return offer;
         } catch (IOException io) {
             io.printStackTrace();
         }
         return null;
     }
 
-    private StarcarOffer parseStarcars(Elements elements) {
+    private StarcarOffer parseStarcars(Elements elements, String url) {
         if (elements != null)
             if (elements.size() == 5) { // no age field
                 String car = elements.get(0).html();
