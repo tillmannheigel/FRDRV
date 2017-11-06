@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class AppConfig {
+class Config {
     /*
   * Use the standard Mongo driver API to create a com.mongodb.MongoClient instance.
   */
