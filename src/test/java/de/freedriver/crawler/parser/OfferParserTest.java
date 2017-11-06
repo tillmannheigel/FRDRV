@@ -30,7 +30,7 @@ public class OfferParserTest extends Mockito {
         offerParser.offerType = "abc";
         //when
         when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
-        Offer offer = offerParser.parseOffer();
+        Offer offer = offerParser.parseOffer("mockUrl", "mockCss");
         //then
         assertNull(offer);
     }
@@ -38,10 +38,12 @@ public class OfferParserTest extends Mockito {
     @Test
     public void parseExistingOffer() throws Exception {
         //given
+        String mockUrl = "mockUrl";
+        String mockCss = "mockCss";
         Element element = mock(Element.class);
         Elements elements = mock(Elements.class);
         offerParser.offerType = "abc";
-        when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
+        when(crawler.crawlHtmlElements(mockUrl, mockCss)).thenReturn(elements);
         when(elements.size()).thenReturn(5);
         when(element.html()).thenReturn("mockHtml");
         for (int i = 0; i < 6; i++) {
@@ -49,7 +51,7 @@ public class OfferParserTest extends Mockito {
         }
 
         //when
-        Offer offer = offerParser.parseOffer();
+        Offer offer = offerParser.parseOffer(mockUrl, mockCss);
 
         //then
         assertNotNull(offer);

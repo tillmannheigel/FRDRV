@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.assertEquals
+import static org.junit.Assert.assertEquals;
 
 import de.freedriver.models.Offer;
 
