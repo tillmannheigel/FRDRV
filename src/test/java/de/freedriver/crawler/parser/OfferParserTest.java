@@ -29,7 +29,6 @@ public class OfferParserTest extends Mockito {
         Elements elements = new Elements(0);
         offerParser.offerType = "abc";
         //when
-        when(crawler.crawlHtmlElements(null, null)).thenReturn(elements);
         Offer offer = offerParser.parseOffer("mockUrl", "mockCss");
         //then
         assertNull(offer);
