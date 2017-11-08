@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class FreedriverService {
 
     @Autowired
@@ -29,11 +33,20 @@ public class FreedriverService {
 
         for (Vendor vendor : vendors.getVendors()) {
             HashSet<String> urls = offerCollectorService.crawlOfferUrls(vendor);
+            deactivateAllOffers();
             for (String url : urls) {
                 Offer offer = offerParser.parseOffer(url, vendor.getOfferCss());
-                offersRepository.save(offer);
+                save(offer);
             }
         }
+    }
+
+    void save(Offer offer){
+        log.info("Save offer: {}", offer.toString());
+        offersRepository.save(offer);
+    }
+
+    void deactivateAllOffers(){
 
     }
 }

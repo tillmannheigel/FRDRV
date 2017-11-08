@@ -1,5 +1,6 @@
 package de.freedriver.crawler.parser;
 
+import de.freedriver.annotations.Crawl;
 import de.freedriver.crawler.CrawlerService;
 import de.freedriver.models.Offer;
 import org.jsoup.nodes.Element;
@@ -22,7 +23,6 @@ public class OfferParserTest extends Mockito {
     @Mock
     CrawlerService crawler;
 
-
     @Test
     public void parseEmptyOffer() throws Exception {
         //given
@@ -35,6 +35,7 @@ public class OfferParserTest extends Mockito {
     }
 
     @Test
+    @Crawl 
     public void parseExistingOffer() throws Exception {
         //given
         String mockUrl = "mockUrl";

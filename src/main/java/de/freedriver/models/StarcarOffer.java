@@ -1,5 +1,7 @@
 package de.freedriver.models;
 
+import java.util.Date;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,5 +16,8 @@ public class StarcarOffer implements Offer {
     String startStation;
     String returnStation;
     String url;
+    Date createdAt;
+    Date updatedAt;
+    Boolean active;
 
 }
