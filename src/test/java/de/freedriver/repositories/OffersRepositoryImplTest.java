@@ -10,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import de.freedriver.annotations.Skip;
 import de.freedriver.models.Offer;
 import de.freedriver.models.StarcarOffer;
 
@@ -36,6 +36,7 @@ public class OffersRepositoryImplTest extends Mockito {
 
 
     @Test
+    @Skip
     public void deactivateAllOffersForOneOffer() {
         //given
         ArrayList<Offer> offers = new ArrayList<>();
