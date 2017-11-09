@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface OffersRepository extends MongoRepository<Offer, String>, OffersRepositoryCustom {
 
-    List<Offer> findOffersByStartAt();
+    List<Offer> findOffersByStartStation();
 }
