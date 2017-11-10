@@ -1,5 +1,10 @@
 package de.freedriver.service;
 
+import java.util.HashSet;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import de.freedriver.crawler.collector.OfferCollectorService;
 import de.freedriver.crawler.parser.OfferParser;
 import de.freedriver.models.Offer;
@@ -7,11 +12,6 @@ import de.freedriver.models.Vendor;
 import de.freedriver.models.Vendors;
 import de.freedriver.repositories.OffersRepository;
 import de.freedriver.util.VendorsParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,20 +33,13 @@ public class FreedriverService {
 
         for (Vendor vendor : vendors.getVendors()) {
             HashSet<String> urls = offerCollectorService.crawlOfferUrls(vendor);
-            deactivateAllOffers();
+            offersRepository.deactivateAllOffers();
             for (String url : urls) {
                 Offer offer = offerParser.parseOffer(url, vendor.getOfferCss());
-                save(offer);
+                log.info("Save offer: {}", offer.toString());
+                offersRepository.save(offer);
             }
         }
-    }
-
-    void save(Offer offer){
-        log.info("Save offer: {}", offer.toString());
-        offersRepository.save(offer);
-    }
-
-    void deactivateAllOffers(){
 
     }
 }

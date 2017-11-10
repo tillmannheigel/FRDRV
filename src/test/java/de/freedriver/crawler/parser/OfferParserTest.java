@@ -1,7 +1,8 @@
 package de.freedriver.crawler.parser;
 
-import de.freedriver.crawler.CrawlerService;
-import de.freedriver.models.Offer;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
@@ -11,8 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import de.freedriver.crawler.CrawlerService;
+import de.freedriver.models.Offer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OfferParserTest extends Mockito {
@@ -26,7 +27,6 @@ public class OfferParserTest extends Mockito {
     public void parseEmptyOffer() throws Exception {
         //given
         Elements elements = new Elements(0);
-        offerParser.offerType = "abc";
         //when
         Offer offer = offerParser.parseOffer("mockUrl", "mockCss");
         //then
@@ -40,7 +40,6 @@ public class OfferParserTest extends Mockito {
         String mockCss = "mockCss";
         Element element = mock(Element.class);
         Elements elements = mock(Elements.class);
-        offerParser.offerType = "abc";
         when(crawler.crawlHtmlElements(mockUrl, mockCss)).thenReturn(elements);
         when(elements.size()).thenReturn(5);
         when(element.html()).thenReturn("mockHtml");

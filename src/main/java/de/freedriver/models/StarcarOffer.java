@@ -2,6 +2,8 @@ package de.freedriver.models;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,15 +11,17 @@ import lombok.Data;
 @Data
 public class StarcarOffer implements Offer {
 
-    String car;
-    String plate;
-    String date;
-    String age;
-    String startStation;
-    String returnStation;
-    String url;
-    Date createdAt;
-    Date updatedAt;
-    Boolean active;
+    @Id
+    private String id;
+    private String car;
+    private String plate;
+    private String date;
+    private String age;
+    private String startStation;
+    private String returnStation;
+    private String url;
+    private Date createdAt;
+    private Date updatedAt;
+    private Boolean active;
 
 }

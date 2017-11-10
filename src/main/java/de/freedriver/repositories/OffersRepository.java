@@ -2,10 +2,12 @@ package de.freedriver.repositories;
 
 import java.util.List;
 
-import de.freedriver.models.Offer;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import de.freedriver.models.Offer;
 
 public interface OffersRepository extends MongoRepository<Offer, String>, OffersRepositoryCustom {
 
     List<Offer> findOffersByStartStation();
+
 }

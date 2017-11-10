@@ -7,6 +7,10 @@ import java.util.Date;
  */
 public interface Offer {
 
+    String getId();
+
+    void setId(final String id);
+
     String getCar();
     
     void setCar(final String car);
