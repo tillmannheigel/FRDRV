@@ -36,7 +36,7 @@ public class FreedriverService {
             offersRepository.deactivateAllOffers();
             for (String url : urls) {
                 Offer offer = offerParser.parseOffer(url, vendor.getOfferCss());
-                log.info("Save offer: {}", offer.toString());
+                log.info("New Offer: {}", offer.toString());
                 offersRepository.save(offer);
             }
         }

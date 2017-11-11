@@ -10,4 +10,6 @@ public interface OffersRepository extends MongoRepository<Offer, String>, Offers
 
     List<Offer> findOffersByStartStation();
 
+    Offer getOfferById(String id);
+
 }
