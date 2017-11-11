@@ -1,8 +1,9 @@
 package de.freedriver.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.core.query.Update.update;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,10 +11,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
-import de.freedriver.annotations.Skip;
+import com.mongodb.WriteResult;
+
 import de.freedriver.models.Offer;
-import de.freedriver.models.StarcarOffer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OffersRepositoryImplTest extends Mockito {
@@ -21,32 +23,18 @@ public class OffersRepositoryImplTest extends Mockito {
     @InjectMocks
     private OffersRepositoryImpl offersRepositoryImpl;
     @Mock
-    private OffersRepository offersRepository;
+    private MongoTemplate mongoTemplate;
 
     @Test
-    public void deactivateAllOffersForZeroOffers() {
+    public void deactivateAllOffersTest() {
         //given
-        ArrayList<Offer> offers = new ArrayList<>();
-        when(offersRepository.findAll()).thenReturn(offers);
+        WriteResult writeResult = mock(WriteResult.class);
+        when(mongoTemplate.updateMulti(query(where("_id").exists(true)), update("active", false), Offer.class)).thenReturn(writeResult);
         //when
-        offersRepositoryImpl.deactivateAllOffers();
+        WriteResult result = offersRepositoryImpl.deactivateAllOffers();
         //then
-        assertThat(offers).isEmpty();
-    }
-
-
-    @Test
-    @Skip
-    public void deactivateAllOffersForOneOffer() {
-        //given
-        ArrayList<Offer> offers = new ArrayList<>();
-        Offer offer = StarcarOffer.builder().active(true).build();
-        offers.add(offer);
-        when(offersRepository.findAll()).thenReturn(offers);
-        //when
-        offersRepositoryImpl.deactivateAllOffers();
-        //then
-        assertThat(offers.get(0).getActive()).isFalse();
+        //ToDo: What else can be tested here?
+        assertThat(result).isEqualTo(writeResult);
     }
 
 }

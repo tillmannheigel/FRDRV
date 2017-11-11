@@ -1,6 +1,8 @@
 package de.freedriver.repositories;
 
+import com.mongodb.WriteResult;
+
 public interface OffersRepositoryCustom {
 
-    void deactivateAllOffers();
+    WriteResult deactivateAllOffers();
 }
