@@ -1,22 +1,12 @@
-!#groovy
+#!groovy
 
 pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build & Unit-Tests') {
             steps {
-                sh "gradle clean build"
-            }
-        }
-        stage('Test') {
-            steps {
-                sh "gradle test"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh "gradle build"
             }
         }
     }
