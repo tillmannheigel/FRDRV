@@ -1,0 +1,7 @@
+---
+- name: Install Docker
+  hosts: all
+  roles:
+    - role: angstwad.docker_ubuntu
+      ssh_port: 2222
+      kernel_pkg_state: present

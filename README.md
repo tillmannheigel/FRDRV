@@ -4,7 +4,7 @@
 
 This project is more or less a personal pet project that implements several patterns and some tools.
 
-The use-case is crawling of webpages, storing data in spring-data repositories and representing those in an (angular?!-)frontend.
+The use-case is crawling of webpages, storing data with spring-data repositories and representing the data in an (angular?!-)frontend.
 
 
 

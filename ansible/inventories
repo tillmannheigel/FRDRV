@@ -1,0 +1,2 @@
+#  inventories should be defined in /etc/ansible/hosts
+

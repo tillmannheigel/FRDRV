@@ -1,0 +1,5 @@
+---
+- hosts: webservers
+  roles:
+    - prepare_docker
+    - deploy_to_host
