@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -37,22 +39,39 @@ public class OfferParserTest extends Mockito {
     }
 
     @Test
-    public void parseExistingOffer() throws Exception {
+    public void parseExistingOfferWithoutAge() throws Exception {
         //given
-        String mockCss = "mockCss";
-        Element element = mock(Element.class);
-        Elements elements = mock(Elements.class);
-        when(crawler.crawlHtmlElements(MOCK_URL, mockCss)).thenReturn(elements);
-        when(elements.size()).thenReturn(5);
-        when(element.html()).thenReturn("mockHtml");
-        for (int i = 0; i < 6; i++) {
-            when(elements.get(i)).thenReturn(element);
-        }
+        String mockCss = givenOfferWithLength(5);
 
         //when
         Offer offer = offerParser.parseOffer(MOCK_URL, mockCss);
 
         //then
         assertNotNull(offer);
+    }
+
+    @Test
+    public void parseExistingOfferWithAge() throws Exception {
+        //given
+        String mockCss = givenOfferWithLength(6);
+
+        //when
+        Offer offer = offerParser.parseOffer(MOCK_URL, mockCss);
+
+        //then
+        assertNotNull(offer);
+    }
+
+    private String givenOfferWithLength(int value) throws IOException {
+        String mockCss = "mockCss";
+        Element element = mock(Element.class);
+        Elements elements = mock(Elements.class);
+        when(crawler.crawlHtmlElements(MOCK_URL, mockCss)).thenReturn(elements);
+        when(elements.size()).thenReturn(value);
+        when(element.html()).thenReturn("mockHtml");
+        for (int i = 0; i < 6; i++) {
+            when(elements.get(i)).thenReturn(element);
+        }
+        return mockCss;
     }
 }
