@@ -10,7 +10,7 @@
 
 
 
-This project is more or less a personal pet project that implements several patterns and some tools.
+This project is more or less a personal pet project that implements some patterns and uses some open-source tools and frameworks.
 
 The use-case is crawling of webpages, storing data with spring-data repositories and representing the data in an (angular?!-)frontend.
 
