@@ -1,6 +1,6 @@
 # FRDRV
 
-<a href="https://travis-ci.org/tillmannheigel/freedriver_V2"><img src="https://travis-ci.org/tillmannheigel/freedriver_V2.svg?branch=master"/></a>
+<a href="https://travis-ci.org/tillmannheigel/FRDRV"><img src="https://travis-ci.org/tillmannheigel/FRDRV.svg?branch=master"/></a>
 
 This project is more or less a personal pet project that implements several patterns and some tools.
 
