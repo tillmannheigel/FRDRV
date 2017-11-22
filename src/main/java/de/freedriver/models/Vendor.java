@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Vendor {
-    String title;
-    String url;
-    String css;
-    String offerCss;
+    private String title;
+    private String url;
+    private String css;
+    private String offerCss;
 }
