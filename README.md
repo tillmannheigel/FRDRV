@@ -1,6 +1,14 @@
 # FRDRV
 
-<a href="https://travis-ci.org/tillmannheigel/FRDRV"><img src="https://travis-ci.org/tillmannheigel/FRDRV.svg?branch=master"/></a>
+<a href="https://travis-ci.org/tillmannheigel/FRDRV">
+   <img src="https://travis-ci.org/tillmannheigel/FRDRV.svg?branch=master"/>
+</a>
+
+<a href="https://codecov.io/gh/tillmannheigel/FRDRV">
+   <img src="https://codecov.io/gh/tillmannheigel/FRDRV/branch/master/graph/badge.svg" alt="Codecov" />
+</a>
+
+
 
 This project is more or less a personal pet project that implements several patterns and some tools.
 
