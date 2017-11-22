@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(MockitoJUnitRunner.class)
 public class OfferParserTest extends Mockito {
 
-    static String MOCK_URL = "http://mock.url/?offer=123";
+    private static String MOCK_URL = "http://mock.url/?offer=123";
     @InjectMocks
     private OfferParser offerParser;
     @Mock
@@ -31,7 +31,7 @@ public class OfferParserTest extends Mockito {
     @Test
     public void parseEmptyOffer() throws Exception {
         //given
-        Elements elements = new Elements(0);
+
         //when
         Offer offer = offerParser.parseOffer(MOCK_URL, "mockCss");
         //then
